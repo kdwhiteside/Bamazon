@@ -37,7 +37,34 @@ inquirer.prompt([
 			connection.end();
 
 		}else if (answer.menu == 'Add to Inventory') {
+			array = [];
+			connection.query('SELECT * FROM Products', function(err, rows, fields) {
+				if (err) throw err;
+				for (var i = 0; i < rows.length; i++) {
+					array.push(rows[i].ProductName)
+				}console.log(array)
+			})
+			inquirer.prompt([
+				{
+					type: 'list',
+					name: 'addToWhat',
+					message: 'What would you like to add more of?',
+					choices: function(){
+						return array},
+				},
+				{
+					type: 'input',
+					message: 'How many?',
+					name: 'number'
+				}
+				]).then(function(answer){
+						connection.query('UPDATE Products SET StockQuantity = StockQuantity + ? WHERE ProductName = ?',[parseInt(answer.number), answer.addToWhat], function(err, rows, fields) {
+							if (err) throw err;
+							console.log("OK")
+						})
+				connection.end();
 
+			})
 		}else if (answer.menu == 'Add New Product') {
 
 		}
