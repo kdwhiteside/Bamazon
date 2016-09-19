@@ -66,6 +66,36 @@ inquirer.prompt([
 
 			})
 		}else if (answer.menu == 'Add New Product') {
+			inquirer.prompt([
+	  			{
+	  				type: "input",
+	  				name: "name",
+	  				message: "What is the name of the new product?"
+	  			},{
+	  				type: "input",
+	  				name: "price",
+	  				message: "What is the price of the new product?"
+	  			},{
+	  				type: "input",
+	  				name: "department",
+	  				message: "What is the department of the new product?"
+	  			},{
+	  				type: "input",
+	  				name: "stock",
+	  				message: "How many of the new product do we have?"
+	  			}]).then(function(answer){
+					connection.query("INSERT INTO products SET ?", {
+					    ProductName: answer.name,
+					    departmentName: answer.department,
+					    Price: answer.price,
+					    StockQuantity: answer.stock
+					}, function(err, res) {
+						if(err) throw err;
+						console.log(res);
+					});
+					console.log("OK!")
+					connection.end();
 
-		}
+				})
+					}
 	})
