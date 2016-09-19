@@ -26,6 +26,15 @@ inquirer.prompt([
 			})
 			connection.end();
 		}else if (answer.menu == 'View Low Inventory') {
+			connection.query('SELECT * FROM Products WHERE StockQuantity <= 5', function(err, rows, fields) {
+				if (err) throw err;
+				console.log("HERE ARE OUR ITEMS BY ID")
+				for (var i = 0; i < rows.length; i++) {
+					console.log(rows[i].ItemID + ": we only have " + rows[i].StockQuantity + " " + rows[i].ProductName + " left!")
+				}
+
+			})
+			connection.end();
 
 		}else if (answer.menu == 'Add to Inventory') {
 
