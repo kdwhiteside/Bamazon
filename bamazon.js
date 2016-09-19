@@ -17,7 +17,7 @@ function pickItem () {
 	if (err) throw err;
 	console.log("HERE ARE OUR ITEMS BY ID")
 	for (var i = 0; i < rows.length; i++) {
-	console.log(rows[i].ItemID + ": " + rows[i].ProductName + " FROM THE " + rows[i].DepartmentName + " DEPARTMENT")
+	console.log(rows[i].ItemID + ": " + rows[i].ProductName + " from the " + rows[i].DepartmentName + " department")
 	}
 	inquirer.prompt([
 		{
